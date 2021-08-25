@@ -3,3 +3,11 @@
 <h2>This is an application to explore movies and create a viewing party event for you and your friends to watch a movie together.</h2>
 
 <%= link_to 'Register a new user', new_user_path %>
+
+<%= form_with url: root_path, method: :post do |form| %>
+  <%= form.label :email, "Email:" %>
+  <%= form.text_field :email %>
+  <%= form.label :password, "Password:" %>
+  <%= form.text_field :password %>
+  <%= form.submit "Log In" %>
+<% end %>
