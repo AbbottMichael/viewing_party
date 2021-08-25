@@ -20,7 +20,16 @@ RSpec.describe 'Welcome page' do
   end
 
   describe 'log in' do
-    it 'can log in with valid credentials'
+    it 'can log in with valid credentials' do
+      save_and_open_page
+
+      fill_in 'email', with: 'foo@bar.com'
+      fill_in 'password', with: 'password1'
+
+      click_on 'Log In'
+
+      expect(current_path).to eq(root_path)
+    end
 
     it 'can not log in with invalid credentials'
   end
