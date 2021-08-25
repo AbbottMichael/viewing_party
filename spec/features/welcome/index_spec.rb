@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Welcome page' do
   before :each do
+    @user = User.create(email: 'funbucket@gmail.com', password: 'password1')
+
     visit root_path
   end
 
@@ -21,16 +23,31 @@ RSpec.describe 'Welcome page' do
 
   describe 'log in' do
     it 'can log in with valid credentials' do
-      save_and_open_page
 
-      fill_in 'email', with: 'foo@bar.com'
+      fill_in 'email', with: 'funbucket@gmail.com'
+      fill_in 'password', with: 'password1'
+
+      click_on 'Log In'
+
+      expect(current_path).to eq(dashboard_path)
+    end
+
+    it 'can not log in without a password' do
+      fill_in 'email', with: 'funbucket@gmail.com'
+
+      click_on 'Log In'
+
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content("Email and Password are required to log-in.")
+    end
+
+    it 'can not log in without an email' do
       fill_in 'password', with: 'password1'
 
       click_on 'Log In'
 
       expect(current_path).to eq(root_path)
+      expect(page).to have_content("Email and Password are required to log-in.")
     end
-
-    it 'can not log in with invalid credentials'
   end
 end
