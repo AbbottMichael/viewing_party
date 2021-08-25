@@ -4,7 +4,7 @@
 
 <%= link_to 'Register a new user', new_user_path %>
 
-<%= form_with url: root_path, method: :post do |form| %>
+<%= form_with url: root_path, method: :post, local: true do |form| %>
   <%= form.label :email, "Email:" %>
   <%= form.text_field :email %>
   <%= form.label :password, "Password:" %>
