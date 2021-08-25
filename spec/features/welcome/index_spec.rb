@@ -9,7 +9,7 @@ RSpec.describe 'Welcome page' do
     expect(page).to have_content('Welcome to Viewing Party!')
   end
 
-  it 'displays a brief discription of the app' do
+  it 'displays a brief description of the app' do
     description = 'This is an application to explore movies and create a viewing party event for you and your friends to watch a movie together.'
     expect(page).to have_content(description)
   end
