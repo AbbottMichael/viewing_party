@@ -4,9 +4,12 @@ root 'welcome#index'
 
 # resources :users, only: [:new]
 
-post '/', to: 'users#login'
+post '/', to: 'sessions#create'
 
 get '/dashboard', to: 'dashboard#index'
+get '/logout', to: 'sessions#destroy'
+
+get '/discover', to: 'discover#index'
 
 get '/register', to: 'users#new'
 post '/register', to: 'users#create'

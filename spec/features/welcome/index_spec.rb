@@ -38,7 +38,7 @@ RSpec.describe 'Welcome page' do
       click_on 'Log In'
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Email and Password are required to log-in.")
+      expect(page).to have_content("Sorry, your credentials are bad.")
     end
 
     it 'can not log in without an email' do
@@ -47,7 +47,7 @@ RSpec.describe 'Welcome page' do
       click_on 'Log In'
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Email and Password are required to log-in.")
+      expect(page).to have_content("Email can not be blank.")
     end
   end
 end

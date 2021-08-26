@@ -17,7 +17,7 @@ RSpec.describe "User registration form" do
 
     click_on "Create User"
     expect(current_path).to eq(dashboard_path)
-    expect(page).to have_content("Welcome, #{email}!")
+    expect(page).to have_content("Welcome #{email}!")
   end
 
   it "does not create a new user when passwords do not match" do
@@ -37,12 +37,12 @@ RSpec.describe "User registration form" do
 
     click_on "Create User"
     expect(current_path).to eq(register_path)
-    expect(page).to have_content(["Password confirmation doesn't match Password"])
+    expect(page).to have_content("Password confirmation doesn't match Password")
   end
 
   it "does not create a new user when password or password_confirmation is blank" do
     visit root_path
-    error_msg = "[\"Password confirmation doesn't match Password\", \"Password confirmation can't be blank\", \"Password can't be blank\"]"
+    error_msg = "Password confirmation doesn't match Password, Password confirmation can't be blank, and Password can't be blank"
 
     click_on "Register a new user"
 
@@ -59,7 +59,7 @@ RSpec.describe "User registration form" do
 
   it "does not create a new user when email is blank" do
     visit root_path
-    error_msg = "[\"Email can't be blank\"]"
+    error_msg = "Email can't be blank"
 
     click_on "Register a new user"
 
