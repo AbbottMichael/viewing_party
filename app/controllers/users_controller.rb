@@ -17,21 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def login
-    user = User.find_by(email: params[:email])
-    if params[:email] == "" || params[:password] == ""
-      flash[:error] = "Email and Password are required to log-in."
-      redirect_to root_path
-    elsif user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:success] = "Welcome, #{user.email}!"
-      redirect_to dashboard_path
-    else
-      flash[:error] = "Sorry, your credentials are bad."
-      redirect_to root_path
-    end
-  end
-
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
