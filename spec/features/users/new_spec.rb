@@ -17,7 +17,7 @@ RSpec.describe "User registration form" do
 
     click_on "Create User"
     expect(current_path).to eq(dashboard_path)
-    expect(page).to have_content("Welcome, #{email}!")
+    expect(page).to have_content("Welcome #{email}!")
   end
 
   it "does not create a new user when passwords do not match" do
