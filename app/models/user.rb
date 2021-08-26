@@ -6,8 +6,10 @@ class User < ApplicationRecord
   has_many :following_users, foreign_key: :follower_id , class_name: "Friend"
   has_many :followers, through: :following_users
 
-  validates :email, uniqueness: true, presence: true
-  validates_presence_of :password, require: true
+  validates_confirmation_of :password
+  validates :email, uniqueness: true, presence: true, allow_empty: false
+  validates_presence_of :password, require: true, allow_empty: false
+  validates_presence_of :password_confirmation, require: true, allow_empty: false
 
-  has_secure_password 
+  has_secure_password
 end
