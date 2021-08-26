@@ -18,7 +18,7 @@ RSpec.describe 'Welcome page' do
 
   it 'has a link to register a new user' do
     click_on('Register a new user')
-    expect(current_path).to eq(new_user_path)
+    expect(current_path).to eq(register_path)
   end
 
   describe 'log in' do
