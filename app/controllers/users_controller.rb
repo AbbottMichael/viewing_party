@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome, #{new_user.email}!"
       redirect_to dashboard_path
     else
-      flash[:error] = new_user.errors.full_messages
+      flash[:error] = new_user.errors.full_messages.to_sentence
       redirect_to register_path
     end
   end
