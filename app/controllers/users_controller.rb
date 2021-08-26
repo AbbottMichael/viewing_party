@@ -5,14 +5,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    if params[:user][:password] == params[:user][:password_confirmation]
-      user = user_params
-      user[:email] = user[:email].downcase
-      new_user = User.create(user)
+    user = user_params
+    user[:email] = user[:email].downcase
+    new_user = User.new(user)
+    if new_user.save
       flash[:success] = "Welcome, #{new_user.email}!"
       redirect_to dashboard_path
     else
-      flash[:error] = "Passwords do not match."
+      flash[:error] = new_user.errors.full_messages
       redirect_to register_path
     end
   end

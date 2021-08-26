@@ -20,7 +20,7 @@ RSpec.describe "User registration form" do
     expect(page).to have_content("Welcome, #{email}!")
   end
 
-  it "does not create a new user with invalid inputs" do
+  it "does not create a new user when passwords do not match" do
     visit root_path
 
     click_on "Register a new user"
@@ -33,10 +33,45 @@ RSpec.describe "User registration form" do
 
     fill_in 'user[email]', with: email
     fill_in 'user[password]', with: password
-    fill_in 'user[password]', with: password2
+    fill_in 'user[password_confirmation]', with: password2
 
     click_on "Create User"
     expect(current_path).to eq(register_path)
-    expect(page).to have_content("Passwords do not match.")
+    expect(page).to have_content(["Password confirmation doesn't match Password"])
+  end
+
+  it "does not create a new user when password or password_confirmation is blank" do
+    visit root_path
+    error_msg = "[\"Password confirmation doesn't match Password\", \"Password confirmation can't be blank\", \"Password can't be blank\"]"
+
+    click_on "Register a new user"
+
+    expect(current_path).to eq("/register")
+
+    email = "funbucket@gmail.com"
+
+    fill_in 'user[email]', with: email
+
+    click_on "Create User"
+    expect(current_path).to eq(register_path)
+    expect(page).to have_content(error_msg)
+  end
+
+  it "does not create a new user when email is blank" do
+    visit root_path
+    error_msg = "[\"Email can't be blank\"]"
+
+    click_on "Register a new user"
+
+    expect(current_path).to eq("/register")
+
+    password = "password1"
+
+    fill_in 'user[password]', with: password
+    fill_in 'user[password_confirmation]', with: password
+
+    click_on "Create User"
+    expect(current_path).to eq(register_path)
+    expect(page).to have_content(error_msg)
   end
 end
