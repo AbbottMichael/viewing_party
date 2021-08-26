@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Welcome page' do
   before :each do
-    @user = User.create(email: 'funbucket@gmail.com', password: 'password1')
+    @user = User.create(email: 'funbucket@gmail.com', password: 'password1', password_confirmation: 'password1')
 
     visit root_path
   end
