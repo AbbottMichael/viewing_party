@@ -59,7 +59,6 @@ RSpec.describe "The user's dashboard" do
 
     it "displays the user's friend's emails" do
       within '#friends' do
-        save_and_open_page
         expect(page).to have_content(@user1.email)
         expect(page).to_not have_content(@user2.email)
       end
