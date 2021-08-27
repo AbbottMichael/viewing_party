@@ -1,0 +1,9 @@
+<h1>Movies</h1>
+<% @popular_movies_1.each do |movie| %>
+  <%= link_to movie.title, movie_path(movie.id) %>
+  <%= movie.vote_average %></br>
+<% end %>
+<% @popular_movies_2.each do |movie| %>
+  <%= link_to movie.title, movie_path(movie.id) %>
+  <%= movie.vote_average %></br>
+<% end %>
