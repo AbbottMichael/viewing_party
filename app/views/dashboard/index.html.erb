@@ -2,9 +2,25 @@
 
 <%= link_to "Log Out", logout_path%>
 <%= button_to "Discover Movies", discover_path, method: :get %>
+
 <section id='friends'>
   <h1>Friends</h1>
+
+  <%= form_with model: @friend, url: friends_path, local: true do |f| %>
+    <%= f.label :email, "Email:" %>
+    <%= f.text_field :email %>
+    <%= f.submit "Add Friend" %>
+  <% end %>
+
+  <% if current_user.followed_users.empty? %>
+    <p>You currently have no friends</p>
+  <% else %>
+    <% current_user.followed_users.each do |friend| %>
+      <%= friend.find_email %>
+    <% end %>
+  <% end %>
 </section>
+
 <section id='viewing_parties'>
   <h1>Viewing Parties</h1>
 </section>
