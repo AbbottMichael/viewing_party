@@ -15,4 +15,7 @@ post '/friends', to: 'friends#create'
 
 get '/register', to: 'users#new'
 post '/register', to: 'users#create'
+
+# get '/movies', to: 'movies#index'
+resources :movies, only: [:index, :show]
 end
