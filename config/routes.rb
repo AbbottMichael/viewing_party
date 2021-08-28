@@ -18,4 +18,6 @@ post '/register', to: 'users#create'
 
 # get '/movies', to: 'movies#index'
 resources :movies, only: [:index, :show]
+
+get '/viewing-party/new', to: 'viewing_parties#new'
 end
