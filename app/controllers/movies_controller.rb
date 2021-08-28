@@ -1,28 +1,32 @@
 class MoviesController < ApplicationController
-  before_action :popular_movies_1_fetch
-  before_action :popular_movies_2_fetch
 
   def index
+    top_rated_movies_fetch
+    movie_search_fetch if params[:search]
   end
 
   def show
     movie_details_fetch
     movie_cast_fetch
     movie_reviews_fetch
-    # movie = Movie.find(params[:id])
   end
 
-  def popular_movies_1_fetch
-    json = MovieService.new.get_popular_movies_1
-    @popular_movies_1 = json[:results].map do |movie|
-      TopRatedMovie.new(movie)
+  def movie_search_fetch
+    if params[:search] == ""
+      flash[:error] = 'Please enter a search parameter'
+      redirect_to discover_path
+    else
+      json = MovieService.new.get_movie_search(params[:search])
+      @results = json[:results].map do |movie|
+        Movie.new(movie)
+      end
     end
   end
 
-  def popular_movies_2_fetch
-    json = MovieService.new.get_popular_movies_2
-    @popular_movies_2 = json[:results].map do |movie|
-      TopRatedMovie.new(movie)
+  def top_rated_movies_fetch
+    json = MovieService.new.get_top_rated_movies
+    @top_rated_movies = json[:results].map do |movie|
+      Movie.new(movie)
     end
   end
 
@@ -30,7 +34,6 @@ class MoviesController < ApplicationController
     json = MovieService.new.get_movie_details(params[:id])
     @movie_details = MovieDetail.new(json)
     @runtime = @movie_details.runtime
-    # require "pry"; binding.pry
   end
 
   def movie_cast_fetch
