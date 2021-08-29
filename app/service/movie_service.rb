@@ -31,11 +31,6 @@ class MovieService
     page1.merge(page2){ |key, page1_v, page2_v| page1_v + page2_v }
   end
 
-  # def get_popular_movies_2
-  #   endpoint = "https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV['movie_api_key']}&language=en-US&page=2"
-  #   get_data(endpoint)
-  # end
-
   def get_data(endpoint)
     response = Faraday.get(endpoint)
     JSON.parse(response.body, symbolize_names: true)
