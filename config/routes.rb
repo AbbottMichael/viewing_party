@@ -21,5 +21,7 @@ resources :movies, only: [:index, :show]
 
 post '/movies', to: 'movies#index'
 
-get '/viewing-party/new', to: 'viewing_parties#new'
+get '/viewing-party/new', to: 'events#new'
+post '/viewing-party/new', to: 'events#create'
+
 end
