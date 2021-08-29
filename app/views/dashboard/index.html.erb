@@ -23,4 +23,8 @@
 
 <section id='viewing_parties'>
   <h1>Viewing Parties</h1>
+  <% current_user.events.each do |f| %>
+    <%= f.title %>
+    <%= f.viewing_time %></br>
+  <% end %>
 </section>
