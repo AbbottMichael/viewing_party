@@ -5,7 +5,7 @@ RSpec.describe 'The Movie Show Page' do
     visit movie_path(19404)
 
     within '#Runtime' do
-      expect(page).to have_content("3h 10min")
+      expect(page).to have_content("3hr 10min")
     end
     within '#Overview' do
       overview = "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga."
