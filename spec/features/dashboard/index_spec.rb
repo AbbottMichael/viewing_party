@@ -23,6 +23,8 @@ RSpec.describe "The user's dashboard" do
     fill_in 'email', with: @user.email
     fill_in 'password', with: @user.password
     click_on 'Log In'
+
+
   end
 
   describe 'page layout' do
@@ -84,6 +86,56 @@ RSpec.describe "The user's dashboard" do
       end
 
       expect(page).to have_content("That email is not in our system")
+    end
+  end
+
+  describe 'Viewing Parties section', :vcr do
+    before :each do
+      visit movie_path(19404)
+
+      click_on 'Create A Viewing Party'
+
+      fill_in 'date_time', with: "2024-09-01T08:30"
+
+      check 'funbucket1@gmail.com'
+      click_on 'Create Party'
+    end
+
+    it 'Displays viewing parties the user is hosting' do
+      expect(current_path).to eq(dashboard_path)
+      within "#viewing_parties" do
+        within "#hosted_parties" do
+          expect(page).to have_content('Dilwale Dulhania Le Jayenge')
+          expect(page).to have_content(Event.last.date_time.strftime("%B-%d-%Y"))
+          expect(page).to have_content(Event.last.date_time.strftime("%I:%M%P"))
+          expect(page).to have_content("Host: #{@user.email}")
+          expect(page).to have_content(@user1.email)
+        end
+      end
+    end
+
+    it 'Displays viewing parties the user is attending' do
+      attended_event = Event.create!(
+        host_id: @user1.id,
+        movie_id: 680,
+        title: 'Pulp Fiction',
+        viewing_time: 154,
+        date_time: "2024-09-01T08:30"
+      )
+      friend2 = Friend.create!(follower_id: @user.id, followed_id: @user1.id)
+      attendee = Attendee.create!(event_id: attended_event.id, user_id: @user.id)
+
+      visit dashboard_path
+
+      within "#viewing_parties" do
+        within "#attended_parties" do
+          expect(page).to have_content('Pulp Fiction')
+          expect(page).to have_content(attended_event.date_time.strftime("%B-%d-%Y"))
+          expect(page).to have_content(attended_event.date_time.strftime("%I:%M%P"))
+          expect(page).to have_content("Host: #{@user1.email}")
+          expect(page).to have_content(@user.email)
+        end
+      end
     end
   end
 end
