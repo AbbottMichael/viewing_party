@@ -43,11 +43,7 @@ RSpec.describe 'The Viewing Party New page' do
       expect(page).to have_content("#{@user2.email}")
       expect(page).to_not have_content("#{@user3.email}")
 
-      select "2021", from: "[day(1i)]"
-      select "August", from: "[day(2i)]"
-      select "29", from: "[day(3i)]"
-      select "14", from: "[start_time(4i)]"
-      select "30", from: "[start_time(5i)]"
+      fill_in 'date_time', with: "2024-09-01T08:30"
 
       check "#{@user1.email}"
 
@@ -59,4 +55,37 @@ RSpec.describe 'The Viewing Party New page' do
         expect(page).to have_content("Dilwale Dulhania Le Jayenge")
       end
     end
+
+    it 'displays error message when creating a viewing party with no friends', :vcr do
+      visit movie_path(19404)
+
+      click_on "Create A Viewing Party"
+
+      expect(current_path).to eq(viewing_party_new_path)
+
+      fill_in 'date_time', with: "2024-09-01T08:30"
+
+      click_on "Create Party"
+
+      expect(current_path).to eq(viewing_party_new_path)
+      expect(page).to have_content('Please include at least 1 friend')
+    end
+
+    it 'displays error message when creating a viewing party with no friends', :vcr do
+      visit movie_path(19404)
+
+      click_on "Create A Viewing Party"
+
+      expect(current_path).to eq(viewing_party_new_path)
+
+      fill_in 'date_time', with: "2024-09-01T08:30"
+      check "#{@user1.email}"
+      fill_in 'viewing_time', with: 20
+
+      click_on "Create Party"
+
+      expect(current_path).to eq(viewing_party_new_path)
+      expect(page).to have_content('Viewing Time must be greater than or equal to runtime.')
+    end
+
 end
