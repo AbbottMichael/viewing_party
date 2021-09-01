@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
     @movie_details = MovieDetailFacade.movie_details_fetch(params[:id])
     @movie_cast = MovieCastFacade.movie_cast_fetch(params[:id])
     @movie_reviews = MovieReviewFacade.movie_reviews_fetch(params[:id])
+    @movie_poster = (MoviePosterFacade.movie_poster_fetch(params[:id])).first
     session[:movie] = { movie_id: params[:id], runtime: @movie_details.runtime, title: @movie_details.title }
   end
 
