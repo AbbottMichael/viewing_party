@@ -23,8 +23,32 @@
 
 <section id='viewing_parties'>
   <h1>Viewing Parties</h1>
+  <section id='hosted_parties'>
+    <h2>Hosted</h2>
   <% current_user.events.each do |f| %>
-    <%= f.title %>
+    <%= link_to f.title, movie_path(f.movie_id) %><br>
+    <%= f.date_time.strftime("%B-%d-%Y") %>
+    <%= f.date_time.strftime("%I:%M%P") %>
     <%= f.viewing_time %></br>
+    <b>Host: <%= f.find_host_email %></b><br>
+    <p>Attendees: <% f.attendees.each do |attendee| %></p>
+      <%= attendee.find_email %>
+    <% end %><br>
   <% end %>
+  </section>
+
+  <section id='attended_parties'>
+  <h2>Attending</h2>
+  <% current_user.attendees.each do |f| %>
+    <% event = f.find_event_by_id %>
+    <%= link_to event.title, movie_path(event.movie_id) %>
+    <%= event.date_time.strftime("%B-%d-%Y") %>
+    <%= event.date_time.strftime("%I:%M%P") %>
+    <%= event.viewing_time %><br>
+    <b>Host: <%= event.find_host_email %></b><br>
+    <p>Attendees: <% event.attendees.each do |attendee| %></p>
+      <%= attendee.find_email %>
+    <% end %><br>
+  <% end %>
+  </section>
 </section>
