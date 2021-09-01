@@ -40,4 +40,12 @@
   <% end %>
 </section>
 
+<section id='Recommendations'>
+<h2>Recommendations:</h2>
+  <% @movie_recommendations.each do |rec| %>
+    <%= link_to rec.title, movie_path(rec.id) %>
+    <%= rec.vote_average %><br>
+  <% end %><br>
+</section>
+
 <%= image_tag @movie_poster.url + @movie_poster.file_path %>
