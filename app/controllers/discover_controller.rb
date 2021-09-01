@@ -1,3 +1,2 @@
 class DiscoverController < ApplicationController
-  
 end
