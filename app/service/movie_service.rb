@@ -1,5 +1,10 @@
 class MovieService
 
+  def get_movie_recommendations(movie_id)
+    endpoint = "https://api.themoviedb.org/3/movie/#{movie_id}/recommendations?api_key=#{ENV['movie_api_key']}&language=en-US&page=1"
+    get_data(endpoint)
+  end
+
   def get_movie_poster(movie_id)
     endpoint = "https://api.themoviedb.org/3/movie/#{movie_id}/images?api_key=#{ENV['movie_api_key']}"
     get_data(endpoint)
