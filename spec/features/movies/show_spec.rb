@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe 'The Movie Show Page' do
+  before :each do
+    @user = User.create(
+      email: 'funbucket@gmail.com',
+      password: 'password1',
+      password_confirmation: 'password1'
+    )
+
+    visit root_path
+
+    fill_in 'email', with: @user.email
+    fill_in 'password', with: @user.password
+    click_on 'Log In'
+  end
+  
   it "displays the movie's 'runtime, overview, genres and vote average'", :vcr do
     visit movie_path(19404)
 

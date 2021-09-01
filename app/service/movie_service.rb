@@ -1,5 +1,4 @@
 class MovieService
-
   def get_movie_recommendations(movie_id)
     endpoint = "https://api.themoviedb.org/3/movie/#{movie_id}/recommendations?api_key=#{ENV['movie_api_key']}&language=en-US&page=1"
     get_data(endpoint)
@@ -15,7 +14,7 @@ class MovieService
     endpoint2 = "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['movie_api_key']}&language=en-US&page=2&include_adult=false&query=#{search_param}"
     page1 = get_data(endpoint)
     page2 = get_data(endpoint2)
-    page1.merge(page2){ |key, page1_v, page2_v| page1_v + page2_v }
+    page1.merge(page2) { |_key, page1_v, page2_v| page1_v + page2_v }
   end
 
   def get_movie_details(movie_id)
@@ -38,7 +37,7 @@ class MovieService
     endpoint2 = "https://api.themoviedb.org/3/movie/top_rated?api_key=#{ENV['movie_api_key']}&language=en-US&page=2"
     page1 = get_data(endpoint)
     page2 = get_data(endpoint2)
-    page1.merge(page2){ |key, page1_v, page2_v| page1_v + page2_v }
+    page1.merge(page2) { |_key, page1_v, page2_v| page1_v + page2_v }
   end
 
   def get_data(endpoint)

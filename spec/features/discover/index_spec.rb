@@ -2,6 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'The Discover index page' do
   before :each do
+    @user = User.create(
+      email: 'funbucket@gmail.com',
+      password: 'password1',
+      password_confirmation: 'password1'
+    )
+    visit root_path
+
+    fill_in 'email', with: @user.email
+    fill_in 'password', with: @user.password
+    click_on 'Log In'
+
     visit discover_path
   end
 

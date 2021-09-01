@@ -14,7 +14,7 @@ class MovieDetail
   end
 
   def format_time
-    "#{self.runtime / 60}hr #{self.runtime % 60}min"
+    "#{runtime / 60}hr #{runtime % 60}min"
   end
 
   private
