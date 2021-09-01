@@ -28,7 +28,18 @@ RSpec.describe 'The Movie Show Page' do
 
   it "should have the images", :vcr do
     visit movie_path(19404)
-    
+
     expect(page).to have_css("img[src*='https://www.themoviedb.org/t/p/w300_and_h450_bestv2/2CAL2433ZeIihfX1Hb2139CX0pW.jpg']")
+  end
+
+  it "displays movie recommendations with links to their show page", :vcr do
+    visit movie_path(19404)
+
+    within '#Recommendations' do
+      expect(page).to have_content("Kuch Kuch Hota Hai")
+    end
+
+    click_on "Kuch Kuch Hota Hai"
+    expect(current_path).to eq(movie_path(11854))
   end
 end
