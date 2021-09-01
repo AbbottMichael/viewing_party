@@ -26,4 +26,9 @@ RSpec.describe 'The Movie Show Page' do
     expect(page).to have_button("Create A Viewing Party")
   end
 
+  it "should have the images", :vcr do
+    visit movie_path(19404)
+    
+    expect(page).to have_css("img[src*='https://www.themoviedb.org/t/p/w300_and_h450_bestv2/2CAL2433ZeIihfX1Hb2139CX0pW.jpg']")
+  end
 end
