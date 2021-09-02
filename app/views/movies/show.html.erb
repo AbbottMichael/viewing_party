@@ -1,51 +1,63 @@
+<br>
+<div align="center";>
 <h1><%= @movie_details.title %></h1>
 
+<%= image_tag @movie_poster.url + @movie_poster.file_path %>
+<br>
+<br>
 <%= button_to "Create A Viewing Party", viewing_party_new_path, method: :get %>
 
 <section id='Runtime'>
 <h2>Runtime:</h2>
   <%= @movie_details.format_time %>
 </section>
+<br>
 
 <section id='Genres'>
 <h2>Genres:</h2>
   <% @movie_details.genres.each do |genre| %>
-    <%= genre %></br>
+    <%= genre %><br>
   <% end %>
 </section>
+<br>
 
 <section id='Overview'>
   <h2>Overview:</h2>
-  <%= @movie_details.overview %></br>
+  <%= @movie_details.overview %><br>
 </section>
+<br>
 
 <section id='Vote_Average'>
 <h2>Vote Average:</h2>
-  <%= @movie_details.vote_average %></br>
+  <%= @movie_details.vote_average %><br>
 </section>
+<br>
 
 <section id='Cast'>
 <h2>Cast:</h2>
   <p><% @movie_cast.each do |cast_member| %>
-    <%= cast_member.name %> |
+    <%= cast_member.name %> &nbsp|&nbsp
     <%= cast_member.character %></p>
   <% end %>
 </section>
+<br>
 
 <section id='Reviews'>
 <h2>Reviews:</h2>
   <% @movie_reviews.each do |review| %>
-    <p id="#{review.author}"><%= review.author %></br>
+    <p id="#{review.author}"><%= review.author %><br>
     <%= review.content %></p>
   <% end %>
 </section>
+<br>
 
 <section id='Recommendations'>
 <h2>Recommendations:</h2>
   <% @movie_recommendations.each do |rec| %>
-    <%= link_to rec.title, movie_path(rec.id) %>
-    <%= rec.vote_average %><br>
+    <%= link_to rec.title, movie_path(rec.id), class: "link-dark" %>
+    &nbsp|&nbsp Vote average: <%= rec.vote_average %><br>
   <% end %><br>
 </section>
+<br>
 
-<%= image_tag @movie_poster.url + @movie_poster.file_path %>
+</div>

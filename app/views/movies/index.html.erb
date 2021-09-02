@@ -1,26 +1,34 @@
+<div align="center"; style="padding:60px" >
 <%= button_to "Find Top Rated Movies", movies_path, method: :get %>
-
+<br>
 <%= form_with url: movies_path, method: :get, local: true do |f| %>
   <%= f.text_field :search %>
   <%= f.submit 'Find Movies' %>
 <% end %>
+</div>
 
+<div align="center"; style="padding:10px" >
 <% if !params[:search] %>
   <section id='Top-Movies'>
   <h1>Movies</h1>
+  <br>
   <% @top_rated_movies.each do |movie| %>
     <p>
-    <%= link_to movie.title, movie_path(movie.id) %>
-    <%= movie.vote_average %>
+    <%= link_to movie.title, movie_path(movie.id), class: "link-dark" %>
+    &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp Vote average: <%= movie.vote_average %>
     </p>
   <% end %>
   </section>
 <% else %>
 <section id='Search'>
   <h1>Search Results</h1>
+  <br>
   <% @results.each do |movie| %>
-    <%= link_to movie.title, movie_path(movie.id) %>
-    <%= movie.vote_average %></br>
+    <p>
+    <%= link_to movie.title, movie_path(movie.id), class: "link-dark" %>
+    &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp Vote average: <%= movie.vote_average %>
+    </p>
   <% end %>
 </section
 <% end %>
+</div>

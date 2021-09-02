@@ -1,6 +1,8 @@
+<div align="center"; style="padding:60px" >
 <%= button_to "Find Top Rated Movies", movies_path, method: :get %>
-
+<br>
 <%= form_with url: movies_path, method: :get, local: true do |f| %>
   <%= f.text_field :search %>
   <%= f.submit 'Find Movies' %>
 <% end %>
+</div>
