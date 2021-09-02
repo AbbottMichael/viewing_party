@@ -8,6 +8,9 @@ class EventsController < ApplicationController
     if params[:friend].all? { |friend| friend == '' }
       flash[:error] = 'Please include at least 1 friend.'
       redirect_to viewing_party_new_path
+    elsif event_params[:date_time] == ''
+      flash[:error] = 'Please include a date and start time.'
+      redirect_to viewing_party_new_path
     elsif event_params[:viewing_time].to_i >= session[:movie]['runtime']
       new_event = Event.create(event_params)
       current_user.events << new_event
