@@ -12,4 +12,9 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: { require: true, allow_empty: false }
 
   has_secure_password
+
+  def friends?(follower)
+    friend = self.followed_users.where('follower_id = ?', follower.id)
+    friend != []
+  end
 end

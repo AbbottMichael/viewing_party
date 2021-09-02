@@ -39,7 +39,7 @@ RSpec.describe "The user's dashboard" do
     end
 
     it "displays a button to 'Discover Movies'" do
-      click_button 'Discover Movies'
+      click_on 'Discover Movies'
 
       expect(current_path).to eq(discover_path)
     end
@@ -85,7 +85,25 @@ RSpec.describe "The user's dashboard" do
         expect(page).to_not have_content('sadbucket@gmail.com')
       end
 
-      expect(page).to have_content("That email is not in our system")
+      expect(page).to have_content("That email is not in our system.")
+    end
+
+    it "can't add current_user as their own friend" do
+      within '#friends' do
+        fill_in 'email', with: 'funbucket@gmail.com'
+        click_on 'Add Friend'
+      end
+
+      expect(page).to have_content("Liking yourself is healthy... but please add a friend that is not yourself.")
+    end
+
+    it "can't add friend more than once" do
+      within '#friends' do
+        fill_in 'email', with: 'funbucket1@gmail.com'
+        click_on 'Add Friend'
+      end
+
+      expect(page).to have_content("#{@user1.email} is already your friend.")
     end
   end
 

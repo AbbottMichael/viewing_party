@@ -1,9 +1,11 @@
-<h1>Welcome <%= current_user.email %>!</h1>
+<div align="center"; style="padding:60px">
+<h2>Welcome <%= current_user.email %>!</h2>
 
-<%= link_to "Log Out", logout_path%>
-<%= button_to "Discover Movies", discover_path, method: :get %>
+<%= link_to "Log Out", logout_path, class: "link-dark" %>
+<br>
+<br>
 
-<section id='friends'>
+<section class="card navbar-custom" style="width: 25rem;" id='friends'>
   <h1>Friends</h1>
 
   <%= form_with model: @friend, url: friends_path, local: true do |f| %>
@@ -11,44 +13,59 @@
     <%= f.text_field :email %>
     <%= f.submit "Add Friend" %>
   <% end %>
+  <br>
 
+  <div class="card-body">
   <% if current_user.followed_users.empty? %>
-    <p>You currently have no friends</p>
+    <h6 class="card-subtitle mb-2 text-muted">You currently have no friends</h6>
   <% else %>
     <% current_user.followed_users.each do |friend| %>
-      <%= friend.find_email %>
+      <h6 class="card-subtitle mb-2 text-muted"><%= friend.find_email %></h6>
     <% end %>
   <% end %>
+  </div>
 </section>
-
-<section id='viewing_parties'>
+<br>
+<section  id='viewing_parties'>
   <h1>Viewing Parties</h1>
-  <section id='hosted_parties'>
+  <section class="card navbar-custom" style="width: 25rem;" id='hosted_parties'>
     <h2>Hosted</h2>
   <% current_user.events.each do |f| %>
-    <%= link_to f.title, movie_path(f.movie_id) %><br>
-    <%= f.date_time.strftime("%B-%d-%Y") %>
-    <%= f.date_time.strftime("%I:%M%P") %>
-    <%= f.viewing_time %></br>
-    <b>Host: <%= f.find_host_email %></b><br>
-    <p>Attendees: <% f.attendees.each do |attendee| %></p>
-      <%= attendee.find_email %>
-    <% end %><br>
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to f.title, movie_path(f.movie_id), class: "link-dark" %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><b>Host: <%= f.find_host_email %></b></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Date: <%= f.date_time.strftime("%B-%d-%Y") %></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Start time: <%= f.date_time.strftime("%I:%M%P") %></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Event length: <%= f.viewing_time %> minutes</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Attendees:</h6>
+      <% f.attendees.each do |attendee| %>
+      <h6 class="card-subtitle mb-2 text-muted"><%= attendee.find_email %></h6>
+      <% end %>
+      <br>
+    </div>
+  <br>
   <% end %>
   </section>
+  <br>
 
-  <section id='attended_parties'>
-  <h2>Attending</h2>
+  <section class="card navbar-custom" style="width: 25rem;" id='attended_parties'>
+    <h2>Attending</h2>
   <% current_user.attendees.each do |f| %>
-    <% event = f.find_event_by_id %>
-    <%= link_to event.title, movie_path(event.movie_id) %>
-    <%= event.date_time.strftime("%B-%d-%Y") %>
-    <%= event.date_time.strftime("%I:%M%P") %>
-    <%= event.viewing_time %><br>
-    <b>Host: <%= event.find_host_email %></b><br>
-    <p>Attendees: <% event.attendees.each do |attendee| %></p>
-      <%= attendee.find_email %>
-    <% end %><br>
+  <% event = f.find_event_by_id %>
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to event.title, movie_path(event.movie_id), class: "link-dark" %></h5>
+      <h6 class="card-subtitle mb-2 text-muted"><b>Host: <%= event.find_host_email %></b></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Date: <%= event.date_time.strftime("%B-%d-%Y") %></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Start time: <%= event.date_time.strftime("%I:%M%P") %></h6>
+      <h6 class="card-subtitle mb-2 text-muted">Event length: <%= event.viewing_time %> minutes</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Attendees:</h6>
+      <% event.attendees.each do |attendee| %>
+      <h6 class="card-subtitle mb-2 text-muted"><%= attendee.find_email %></h6>
+      <% end %>
+      <br>
+    </div>
+  <br>
   <% end %>
   </section>
 </section>
+</div>

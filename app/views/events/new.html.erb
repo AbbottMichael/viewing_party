@@ -1,12 +1,15 @@
+<div align="center"; style="padding:60px">
 <h1>Viewing Party Details</h1>
+<br>
 
 <%= form_with url: viewing_party_new_path, method: :post, local: true do |f| %>
   <%= f.label :title, "Movie Title" %>
-  <%= f.text_field :title, value: session[:movie]['title'], readonly: true %>
+  <%= f.text_field :title, value: session[:movie]['title'], readonly: true %><br><br>
   <%= f.label :viewing_time, "Duration of Party" %>
-  <%= f.text_field :viewing_time, value: session[:movie]['runtime']  %>
+  <%= f.text_field :viewing_time, value: session[:movie]['runtime']  %><br><br>
   <input type="datetime-local" id="meeting-time" name="date_time"
-       min="2021-08-31T08:30" max="2025-09-01T08:30">
-  <%= f.collection_check_boxes(:friend,current_user.followed_users, :follower_id, :find_email) %>
+       min="2021-08-31T08:30" max="2025-09-01T08:30"><br><br>
+  <%= f.collection_check_boxes(:friend,current_user.followed_users, :follower_id, :find_email) %><br><br>
   <%= f.submit "Create Party" %>
 <% end %>
+</div>
