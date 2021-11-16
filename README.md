@@ -2,6 +2,8 @@
 
 This is the base repo for the [viewing party project](https://backend.turing.io/module3/projects/viewing_party) used for Turing's Backend Module 3.
 
+[Deployed app](https://murmuring-caverns-00891.herokuapp.com/)
+
 ### About this Project
 
 Viewing party is an application in which users can explore movie options and create a viewing party event for the user and friend's.
