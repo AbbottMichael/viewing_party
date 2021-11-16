@@ -23,10 +23,10 @@ Example wireframes to follow are found [here](https://backend.turing.io/module3/
 
 ## Contributors
 
-![](https://avatars.githubusercontent.com/u/81197317?v=4)  **Jacob Piland**
+![](https://avatars.githubusercontent.com/u/81197317?s=40&v=4)  **Jacob Piland**
 - Github: [Jtpiland](https://github.com/Jtpiland)
 - LinkedIn: [jacob-piland](https://www.linkedin.com/in/jacob-piland/)
 
-![](https://avatars.githubusercontent.com/u/81139173?v=4)  **Michael Abbott**
+![](https://avatars.githubusercontent.com/u/81139173?s=40&v=4)  **Michael Abbott**
 - Github: [AbbottMichael](https://github.com/AbbottMichael)
 - LinkedIn: [mjabbottdesign](https://www.linkedin.com/in/mjabbottdesign/)
