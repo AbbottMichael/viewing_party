@@ -1,3 +1,6 @@
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/81139173/142085503-bc31fbcc-9ca4-4ee8-a61e-4855de3487b4.gif)
+
+
 # Viewing Party
 
 This is the base repo for the [viewing party project](https://backend.turing.io/module3/projects/viewing_party) used for Turing's Backend Module 3.
